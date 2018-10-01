@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<style>
+    tr {
+        text-align: center;
+    }
+</style>
+
+</head>
+<body>
+
+<div align="center" data-ng-app="myApp" data-ng-controller="TestData"> 
+<table border="1">
+    <tr class="thead" style="font-size: large;text-align: center;">
+        <td>Name</td>
+        <td>Permanent</td>
+        <td>Role</td>
+        <td>Phone</td>
+        <td>Address</td>
+       
+    </tr>
+    <tr data-ng-repeat="x in data">
+        <td>{{ x.Name }}</td>
+        <td>{{ x.Permanent }}</td>
+        <td>{{ x.Role }}</td>
+        <td>{{ x.Phone }}</td>
+        <td>{{ x.Address }}</td>
+        
+    </tr>
+</table>
+</div>  
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('TestData', function($scope, $http) {
+  $http.get("http://localhost:8088/EmployeeManagement/EmployeeJSONReader.action").
+    success(function (response) {$scope.data = response.employee.txt;});
+});
+</script>
+
+</body>
+</html>
